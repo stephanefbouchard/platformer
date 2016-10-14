@@ -37,8 +37,8 @@ Game.Level.prototype.loadTerrain = function(gameScene) {
 var BADGE_TILE_MIN = 200;
 var BADGE_TILE_MAX = 205;
 
-var DOOR_TILE = 10;
-var DOOR_TILE_TOP = 11;
+var DOOR_TILE = 100;
+var DOOR_TILE_TOP = 101;
 
 
 Game.Level.prototype.checkForTerrainCollision = function() {
@@ -75,14 +75,15 @@ Game.Level.prototype.checkTileCollision = function(x, y) {
 	var tile = this.getTileAtPosition(x, y);
 
 	if (tile.y >= 0 && tile.y < this.map.length) {
-		var object = this.map[tile.y][tile.x];
-		if (object > 0) {
+		var code = this.map[tile.y][tile.x];
+		var object = this.tiles[tile.y][tile.x];
+		if (object && code > 0) {
 			//BADGE CASE
-			if (object >= BADGE_TILE_MIN && object <= BADGE_TILE_MAX) {
-				this.map[tile.y][tile.x] = 0;
+			if (code >= BADGE_TILE_MIN && code <= BADGE_TILE_MAX) {
 				this.gameScene.removeChild(this.tiles[tile.y][tile.x]);
+				delete(this.tiles[tile.y][tile.x]);
 				this.statusBar.incrementCoins();
-			} else if (object === DOOR_TILE || object === DOOR_TILE_TOP) {
+			} else if (code === DOOR_TILE || code === DOOR_TILE_TOP) {
 				this.finish = true;
 				return true;
 			} else {

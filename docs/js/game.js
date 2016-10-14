@@ -13,6 +13,7 @@ Game.Game = function(levels, config) {
 			leftOn: false
 		},
 		currentLevel: 0,
+		badges: 0,
 		done: false
 	};
 
@@ -36,7 +37,7 @@ Game.Game.prototype.setup = function() {
 	this.sound.themeSong();
 
 	//Loading Status bar
-	this.statusBar = new Game.StatusBar(this.sound, this.config);
+	this.statusBar = new Game.StatusBar(this.sound, this.gameState, this.config);
 	this.stage.addChild(this.statusBar.load());
 
 	//End Scene
@@ -107,10 +108,13 @@ Game.Game.prototype.play = function() {
 Game.Game.prototype.restart = function() {
 	this.gameState.currentLevel = 0;
 	this.gameState.done = false;
+	this.gameState.badges = 0;
 
 	this.gameScene.visible = true;
 	this.gameOverScene.hide();
 	this.winScene.hide();
+
+	this.statusBar.refresh();
 
 	this.loadCurrentLevel();
 
