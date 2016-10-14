@@ -16,9 +16,21 @@ Game.WinScene.prototype.load = function () {
 	message.y = 120;
 	this.container.addChild(message);
 
+	var message = new Text(
+		"'R' to restart",
+		{font: "32px Futura", fill: "black"}
+	);
+	message.x = 1000;
+	message.y = 500;
+	this.container.addChild(message);
+
 	return this.container;
 };
 
 Game.WinScene.prototype.show = function() {
 	this.container.visible = true;
+};
+
+Game.WinScene.prototype.hide = function() {
+	this.container.visible = false;
 };

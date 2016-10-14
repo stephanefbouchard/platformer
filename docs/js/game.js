@@ -53,7 +53,7 @@ Game.Game.prototype.setup = function() {
 	this.loadCurrentLevel();
 
 	//Controls
-	this.controls = new Game.KeyControls(this.sound, this.gameState, this.player);
+	this.controls = new Game.KeyControls(this.sound, this, this.gameState, this.player);
 	this.controls.init();
 
 	//Set the game state
@@ -102,6 +102,19 @@ Game.Game.prototype.play = function() {
 		this.done();
 		this.end();
 	}
+};
+
+Game.Game.prototype.restart = function() {
+	this.gameState.currentLevel = 0;
+	this.gameState.done = false;
+
+	this.gameScene.visible = true;
+	this.gameOverScene.hide();
+	this.winScene.hide();
+
+	this.loadCurrentLevel();
+
+	this.gameLoop()
 };
 
 Game.Game.prototype.nextLevel = function() {

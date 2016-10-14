@@ -1,7 +1,8 @@
 var Game = Game || {};
 
-Game.KeyControls = function(sound, gameState, player) {
+Game.KeyControls = function(sound, game, gameState, player) {
 	this.sound = sound;
+	this.game = game;
 	this.player = player;
 	this.gameState = gameState;
 	this.gameState.controls.rightOn = false;
@@ -11,7 +12,8 @@ Game.KeyControls = function(sound, gameState, player) {
 Game.KeyControls.prototype.init = function() {
 	var left = this.keyboard(37),
 		up = this.keyboard(32),
-		right = this.keyboard(39);
+		right = this.keyboard(39),
+		restart = this.keyboard(82);
 
 	left.press = function() {
 		this.gameState.controls.leftOn = true;
@@ -38,6 +40,10 @@ Game.KeyControls.prototype.init = function() {
 	}.bind(this);
 	right.release = function() {
 		this.gameState.controls.rightOn = false;
+	}.bind(this);
+
+	restart.press = function() {
+		this.game.restart();
 	}.bind(this);
 };
 

@@ -16,9 +16,21 @@ Game.GameOverScene.prototype.load = function () {
 	message.y = 120;
 	this.container.addChild(message);
 
+	var message = new Text(
+		"'R' to restart",
+		{font: "32px Futura", fill: "black"}
+	);
+	message.x = 1000;
+	message.y = 500;
+	this.container.addChild(message);
+
 	return this.container;
 };
 
 Game.GameOverScene.prototype.show = function() {
 	this.container.visible = true;
+};
+
+Game.GameOverScene.prototype.hide = function() {
+	this.container.visible = false;
 };
